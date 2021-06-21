@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Adolfo Ingelmo",
+    "version": "1.0.0",
+    "title": "MealDeal-Python3-Flask-Rest-Boilerplate"
+  },
+  "paths": {
+    "/config/{mealId}/updateMenu": {
+      "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the meal that we want to update",
+            "type": "int"
+          }
+      ],
+      "post": {
+        "tags": [
+          "Meal request"
+        ],
+        "summary": "Update OnMenu",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/Meal"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Meal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "onMenu": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "updateDate": {
+            "type": "number"
+          },
+          "updateUser": {
+            "type": "string"
+          },
+          "Code": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "roleId": {
+            "type": "integer"
+          }
+        }
+      },
+      "userRoles": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "canEdit": {
+            "type": "integer"
+          },
+          "canAdd": {
+            "type": "integer"
+          },
+          "canDelete": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

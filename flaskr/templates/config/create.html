@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Añadir nuevo plato{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="name">Nombre</label>
+        <input name="name" id="name" value="{{ request.form['name'] }}" required>
+        <label for="price">Precio</label>
+        <input name="price" id = "price" required>{{ request.form['price'] }}
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

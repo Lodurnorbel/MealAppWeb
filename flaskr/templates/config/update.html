@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Editar "{{ meal['name'] }}" {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="name">Nombre</label>
+        <input name="name" id="name"
+            value="{{ request.form['name'] or meal['name'] }}" required>
+        <label for="price">Precio</label>
+        <input name="price" id="price"
+               value="{{ request.form['price'] or meal['price'] }}" required>
+        <input type="submit" value="Save">
+    </form>
+    <hr>
+    {% if g.role['canDelete'] == 1%}
+        <form action="{{ url_for('config.delete', mealId=meal['id']) }}" method="post">
+            <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure');">
+        </form>
+    {% endif%}
+{% endblock %}

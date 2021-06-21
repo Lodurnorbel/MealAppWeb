@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1 class="text-center">{% block title %}Administrador de comidas{% endblock %}</h1>
+    {% if g.user and g.user['roleId'] and g.role['canAdd'] == 1%}
+        <a class="action" href="{{ url_for('config.create') }}">Insertar</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">En el menú</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for meal in meals %}
+            <tr>
+                <th scope="row">{{ meal['id'] }}</th>
+                <td>{{ meal['name'] }}</td>
+                <td>{{ meal['price'] }}€</td>
+                <td>
+                    {% if g.user and g.role['canEdit'] == '1' %}
+                        <a class="action" href="{{ url_for('config.updateMenu', mealId=meal['id']) }}">
+                            <input class="form-check-input mt-0" type="checkbox" value=onMenuBox
+                                {{ 'checked' if meal['onMenu'] == 1 else '' }}>
+                        </a>
+                    {% else %}
+                        <input class="form-check-input mt-0" type="checkbox" value=onMenuBox onclick="return false"
+                            {{ 'checked' if meal['onMenu'] == 1 else '' }}>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if g.user and g.role['canEdit'] == '1' %}
+                        <a class="action" href="{{ url_for('config.update', mealId=meal['id']) }}">Editar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
